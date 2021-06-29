@@ -9,11 +9,7 @@ type Props = {
   label: string;
 };
 
-export function Checkbox({
-  checked,
-  label,
-  onChange,
-}: Props): JSX.Element | null {
+export function Checkbox({ checked, label, onChange }: Props): JSX.Element | null {
   return (
     <CheckboxStyled>
       <input
@@ -55,6 +51,7 @@ const CheckboxStyled = styled.label({
     visibility: "hidden",
     marginRight: grid(0, 0, 1),
     ":before": {
+      cursor: "pointer",
       visibility: "visible",
       position: "absolute",
       content: "''",
@@ -65,6 +62,7 @@ const CheckboxStyled = styled.label({
       background: Colors.blueGrey(100),
     },
     ":after": {
+      cursor: "pointer",
       visibility: "visible",
       content: "''",
       display: "block",

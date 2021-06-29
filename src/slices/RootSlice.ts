@@ -1,10 +1,4 @@
-import {
-  createFactory,
-  useCallback,
-  useChildren,
-  useMemo,
-  useState,
-} from "democrat";
+import { createFactory, useCallback, useChildren, useMemo, useState } from "democrat";
 import { nanoid } from "nanoid";
 import { expectNever, FactoryState } from "../logic/Utils";
 import { CreateTableSlice } from "./CreateTableSlice";
@@ -16,9 +10,7 @@ type StatementType = "CreateTable" | "Select";
 export type RootSliceState = FactoryState<typeof RootSlice>;
 
 export const RootSlice = createFactory(() => {
-  const [statementsList, setStatementsList] = useState<
-    Array<{ type: StatementType; id: string }>
-  >(() => []);
+  const [statementsList, setStatementsList] = useState<Array<{ type: StatementType; id: string }>>(() => []);
 
   const addStatement = useCallback((type: StatementType) => {
     setStatementsList((prev) => [...prev, { type, id: nanoid(6) }]);

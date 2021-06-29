@@ -4,7 +4,7 @@ import { ColorName, Colors, fontHeightGrid, grid } from "../logic/Design";
 import { addBetween, filterDefined } from "../logic/Utils";
 import { Button } from "./Button";
 import { Spacer } from "./Spacer";
-import { CaretRight, CaretDown } from "phosphor-react";
+import { CaretRight, CaretDown, Trash } from "phosphor-react";
 
 type Props = {
   collapsed: boolean;
@@ -40,9 +40,9 @@ export function Block({
       <Header>
         <Icon onClick={() => setCollapsed(!collapsed)}>
           {collapsed ? (
-            <CaretRight size={grid(1)} />
+            <CaretRight weight="bold" color={Colors.blueGrey(900)} size={grid(0, 1, 1)} />
           ) : (
-            <CaretDown size={grid(1)} />
+            <CaretDown weight="bold" color={Colors.blueGrey(900)} size={grid(0, 1, 1)} />
           )}
         </Icon>
         <Spacer width={[0, 1]} />
@@ -50,10 +50,8 @@ export function Block({
           <Title>{name}</Title>
           {!collapsed && headerContols}
         </HeaderWrap>
-        <Spacer height={[0, 1]} />
-        <Button color="red" colorLevel={500} onClick={onRemove}>
-          Delete
-        </Button>
+        <Spacer width={[0, 1]} />
+        <Button color={color} colorLevel={500} onClick={onRemove} icon={<Trash />} />
       </Header>
       {!collapsed && (
         <Fragment>

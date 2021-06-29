@@ -1,4 +1,5 @@
 import React from "react";
+import { ItemColor } from "../logic/ItemColors";
 import { SelectSliceState } from "../slices/SelectSlice";
 import { Block } from "./Block";
 
@@ -7,17 +8,14 @@ interface SelectEditorProps {
   onRemove: () => void;
 }
 
-export function SelectEditor({
-  slice,
-  onRemove,
-}: SelectEditorProps): JSX.Element | null {
+export function SelectEditor({ slice, onRemove }: SelectEditorProps): JSX.Element | null {
   return (
     <Block
       collapsed={slice.collapsed}
       setCollapsed={slice.setCollapsed}
       onRemove={onRemove}
       name="SELECT"
-      color="purple"
+      color={ItemColor.Select}
     />
   );
 }

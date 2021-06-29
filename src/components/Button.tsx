@@ -1,10 +1,4 @@
-import {
-  fontHeightGrid,
-  Fonts,
-  grid,
-  Colors,
-  ColorName,
-} from "../logic/Design";
+import { fontHeightGrid, Fonts, grid, Colors, ColorName } from "../logic/Design";
 import styled from "styled-components";
 import { IconContext } from "phosphor-react";
 
@@ -26,23 +20,10 @@ const ICON_CONFIG: IconContextProps = {
   mirrored: false,
 };
 
-export function Button({
-  children,
-  color = "blue",
-  colorLevel = 100,
-  icon,
-  onClick,
-}: Props): JSX.Element | null {
+export function Button({ children, color = "blue", colorLevel = 100, icon, onClick }: Props): JSX.Element | null {
   return (
-    <ButtonStyled
-      buttonColor={color}
-      buttonColorLevel={colorLevel}
-      iconMode={Boolean(icon)}
-      onClick={onClick}
-    >
-      <IconContext.Provider value={ICON_CONFIG}>
-        {icon ?? children}
-      </IconContext.Provider>
+    <ButtonStyled buttonColor={color} buttonColorLevel={colorLevel} iconMode={Boolean(icon)} onClick={onClick}>
+      <IconContext.Provider value={ICON_CONFIG}>{icon ?? children}</IconContext.Provider>
     </ButtonStyled>
   );
 }

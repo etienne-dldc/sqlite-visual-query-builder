@@ -1,26 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import SplitPane from "react-split-pane";
 import styled from "styled-components";
 import { Editor } from "./Editor";
 import { Preview } from "./Preview";
-import { createStore } from "democrat";
-import { RootSlice } from "../slices/RootSlice";
+import { createStore, Snapshot, Store } from "democrat";
+import { RootSlice, RootSliceState } from "../slices/RootSlice";
 import { ScrollFlex } from "./ScrollFlex";
 import { Spacer } from "./Spacer";
 import { Colors, fontHeightGrid, Fonts, grid } from "../logic/Design";
 import { Code, Heart, TwitterLogo } from "phosphor-react";
 
 export function App(): JSX.Element | null {
-  const [store] = useState(() =>
-    createStore(RootSlice.createElement(), { ReactInstance: React })
-  );
-  const [state, setState] = useState(() => store.getState());
+  const [state, setState] = useState<RootSliceState | null>(null);
 
   useEffect(() => {
-    return store.subscribe(() => {
+    const snap: Snapshot | undefined = (window as any).snapshot;
+    const store = createStore(RootSlice.createElement(), { ReactInstance: React, snapshot: snap });
+    setState(store.getState());
+    const unsub = store.subscribe(() => {
       setState(store.getState());
     });
-  }, [store]);
+    return () => {
+      const snap = store.getSnapshot();
+      (window as any).snapshot = snap;
+      unsub();
+      store.destroy();
+    };
+  }, []);
 
   return (
     <Wrapper>
@@ -33,48 +39,28 @@ export function App(): JSX.Element | null {
       >
         <Pane>
           <ScrollFlex>
-            <EditorWrapper>
-              <Editor state={state} />
-            </EditorWrapper>
+            <EditorWrapper>{state && <Editor state={state} />}</EditorWrapper>
             <Spacer height={[1]} />
             <Credits>
               <CreditsText>
-                Made with{" "}
-                <Heart
-                  weight="fill"
-                  color={Colors.red(500)}
-                  size={grid(1)}
-                  style={{ marginBottom: -7 }}
-                />{" "}
-                by{" "}
+                Made with <Heart weight="fill" color={Colors.red(500)} size={grid(1)} style={{ marginBottom: -7 }} /> by{" "}
                 <a href="https://twitter.com/Etienne_dot_js">
-                  <TwitterLogo
-                    weight="fill"
-                    color="#1DA1F2"
-                    size={grid(1)}
-                    style={{ marginBottom: -7 }}
-                  />{" "}
-                  @Etienne.js
+                  <TwitterLogo weight="fill" color="#1DA1F2" size={grid(1)} style={{ marginBottom: -7 }} /> @Etienne.js
                 </a>
               </CreditsText>
               <Spacer height={[0, 0, 1]} />
               <CreditsText>
                 Explore the{" "}
                 <a href="https://github.com/etienne-dldc/sqlite-visual-query-builder">
-                  <Code
-                    weight="fill"
-                    color={Colors.blueGrey(900)}
-                    size={grid(1)}
-                    style={{ marginBottom: -7 }}
-                  />{" "}
-                  Code on Github
+                  <Code weight="fill" color={Colors.blueGrey(900)} size={grid(1)} style={{ marginBottom: -7 }} /> Code
+                  on Github
                 </a>
               </CreditsText>
             </Credits>
             <Spacer height={[1]} />
           </ScrollFlex>
         </Pane>
-        <Preview content={state.sql} />
+        <Preview content={state ? state.sql : ""} />
       </SplitPane>
     </Wrapper>
   );

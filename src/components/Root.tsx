@@ -14,10 +14,9 @@ const GlobalStyle = createGlobalStyle({
       border: "0",
       verticalAlign: "baseline",
     },
-  "article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section":
-    {
-      display: "block",
-    },
+  "article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section": {
+    display: "block",
+  },
   "blockquote, q": { quotes: "none" },
   "blockquote::before, blockquote::after, q::before, q::after": {
     content: "none",

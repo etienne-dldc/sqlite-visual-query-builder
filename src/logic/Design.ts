@@ -1,7 +1,4 @@
-import {
-  ColorName as IColorName,
-  InterpolatedMaterialColors as MaterialColors,
-} from "interpolated-material-colors";
+import { ColorName as IColorName, InterpolatedMaterialColors as MaterialColors } from "interpolated-material-colors";
 import { createFont } from "ts-fonts";
 
 export function grid(

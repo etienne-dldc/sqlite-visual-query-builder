@@ -7,10 +7,7 @@ export function expectNever(_val: never): never {
   throw new Error("Unexpected never");
 }
 
-export function addBetween<T>(
-  list: Array<T>,
-  addItem: (sepIndex: number, before: T, after: T) => T
-): Array<T> {
+export function addBetween<T>(list: Array<T>, addItem: (sepIndex: number, before: T, after: T) => T): Array<T> {
   return list.reduce<Array<T>>((acc, item, index) => {
     if (index > 0) {
       const before = list[index - 1];
@@ -22,12 +19,7 @@ export function addBetween<T>(
   }, []);
 }
 
-export type FactoryState<F extends Factory<any, any>> = F extends Factory<
-  any,
-  infer R
->
-  ? R
-  : never;
+export type FactoryState<F extends Factory<any, any>> = F extends Factory<any, infer R> ? R : never;
 
 export function renderAround(
   before: React.ReactNode | null,
@@ -59,17 +51,10 @@ export function renderAfter(
   );
 }
 
-export function filterJoin(
-  items: Array<string | false | null | undefined>,
-  joiner: string
-): string {
+export function filterJoin(items: Array<string | false | null | undefined>, joiner: string): string {
   return items.filter((v): v is string => typeof v === "string").join(joiner);
 }
 
-export function filterDefined<T>(
-  items: Array<T | false | null | undefined>
-): Array<T> {
-  return items.filter(
-    (v): v is T => v !== false && v !== null && v !== undefined
-  );
+export function filterDefined<T>(items: Array<T | false | null | undefined>): Array<T> {
+  return items.filter((v): v is T => v !== false && v !== null && v !== undefined);
 }

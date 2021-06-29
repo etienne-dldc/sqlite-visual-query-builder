@@ -1,16 +1,7 @@
-import {
-  useLayoutEffect,
-  useEffect,
-  MutableRefObject,
-  useCallback,
-  useState,
-  useMemo,
-  useRef,
-} from "react";
+import { useLayoutEffect, useEffect, MutableRefObject, useCallback, useState, useMemo, useRef } from "react";
 import ResizeObserver from "resize-observer-polyfill";
 
-const useIsomorphicLayoutEffect =
-  typeof window !== "undefined" ? useLayoutEffect : useEffect;
+const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 interface Result {
   width: number | undefined;
@@ -32,9 +23,7 @@ function getSize(el: HTMLElement | null) {
   };
 }
 
-export function useElementSize(
-  ref?: MutableRefObject<HTMLElement | null>
-): Result {
+export function useElementSize(ref?: MutableRefObject<HTMLElement | null>): Result {
   const usedRef = useOrCreateRef<HTMLElement | null>(null, ref);
   const node = useRefInState(usedRef);
   const [size, setSize] = useState(getSize(node));
@@ -55,9 +44,7 @@ export function useElementSize(
 
     handleResize();
 
-    let resizeObserver: ResizeObserver | null = new ResizeObserver(() =>
-      handleResize()
-    );
+    let resizeObserver: ResizeObserver | null = new ResizeObserver(() => handleResize());
     resizeObserver.observe(node);
 
     return () => {

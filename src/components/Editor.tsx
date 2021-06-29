@@ -2,6 +2,7 @@ import { createStore } from "democrat";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { grid } from "../logic/Design";
+import { ItemColor } from "../logic/ItemColors";
 import { addBetween, expectNever } from "../logic/Utils";
 import { RootSliceState } from "../slices/RootSlice";
 import { Button } from "./Button";
@@ -19,22 +20,10 @@ export function Editor({ state }: EditorProps): JSX.Element | null {
       {addBetween(
         state.statementsSlices.map((slice) => {
           if (slice.type === "CreateTable") {
-            return (
-              <CreateTableEditor
-                key={slice.id}
-                slice={slice}
-                onRemove={() => state.removeStatement(slice.id)}
-              />
-            );
+            return <CreateTableEditor key={slice.id} slice={slice} onRemove={() => state.removeStatement(slice.id)} />;
           }
           if (slice.type === "Select") {
-            return (
-              <SelectEditor
-                key={slice.id}
-                slice={slice}
-                onRemove={() => state.removeStatement(slice.id)}
-              />
-            );
+            return <SelectEditor key={slice.id} slice={slice} onRemove={() => state.removeStatement(slice.id)} />;
           }
           expectNever(slice);
         }),
@@ -44,11 +33,11 @@ export function Editor({ state }: EditorProps): JSX.Element | null {
       )}
       {state.statementsSlices.length > 0 && <Spacer height={[0, 1]} />}
       <Buttons>
-        <Button color="blue" onClick={() => state.addStatement("CreateTable")}>
+        <Button color={ItemColor.CreateTable} onClick={() => state.addStatement("CreateTable")}>
           + Create Table
         </Button>
         <Spacer width={[0, 1]} />
-        <Button color="purple" onClick={() => state.addStatement("Select")}>
+        <Button color={ItemColor.Select} onClick={() => state.addStatement("Select")}>
           + Select
         </Button>
       </Buttons>
