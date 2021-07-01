@@ -29,7 +29,7 @@ export const ColumnDefSlice = createFactory(({ id }: Props) => {
           name,
           dataType,
           notNull && "NOT NULL",
-          primary && "PRIMARY",
+          primary && "PRIMARY KEY",
           unique && "UNIQUE",
           references && filterJoin(["REFERENCES", `${foreignTable}(${filterJoin(foreignColumns, ", ")})`], " "),
         ],

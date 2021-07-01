@@ -31,7 +31,7 @@ export function ColumnDefEditor({ onRemove, slice }: ColumnDefEditorProps): JSX.
           <Input label="column" value={slice.name} onChange={slice.setName} placeholder="Column name" />
           <Select<DataType> label="type" value={slice.dataType} options={DATA_TYPE} onChange={slice.setDataType} />
           <Checkbox checked={slice.notNull} onChange={slice.setNotNull} label="NOT NULL" />
-          <Checkbox checked={slice.primary} onChange={slice.setPrimary} label="PRIMARY" />
+          <Checkbox checked={slice.primary} onChange={slice.setPrimary} label="PRIMARY KEY" />
           <Checkbox checked={slice.unique} onChange={slice.setUnique} label="UNIQUE" />
           <Checkbox checked={slice.references} onChange={slice.setReferences} label="REFERENCES" />
         </Fragment>
