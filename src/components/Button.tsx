@@ -1,9 +1,8 @@
 import { fontHeightGrid, Fonts, grid, Colors, ColorName } from "../logic/Design";
 import styled from "styled-components";
-import { IconContext } from "phosphor-react";
+import { IconContext, IconProps } from "phosphor-react";
 
 import React from "react";
-import { IconContextProps } from "phosphor-react/dist/lib";
 
 type Props = {
   color?: ColorName;
@@ -13,7 +12,7 @@ type Props = {
   onClick?: () => void;
 };
 
-const ICON_CONFIG: IconContextProps = {
+const ICON_CONFIG: IconProps = {
   size: grid(1),
   color: "currentColor",
   weight: "regular",
