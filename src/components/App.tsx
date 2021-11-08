@@ -44,8 +44,8 @@ export function App(): JSX.Element | null {
             <Credits>
               <CreditsText>
                 Made with <Heart weight="fill" color={Colors.red(500)} size={grid(1)} style={{ marginBottom: -7 }} /> by{" "}
-                <a href="https://twitter.com/Etienne_dot_js">
-                  <TwitterLogo weight="fill" color="#1DA1F2" size={grid(1)} style={{ marginBottom: -7 }} /> @Etienne.js
+                <a href="https://dldc.dev/twitter">
+                  <TwitterLogo weight="fill" color="#1DA1F2" size={grid(1)} style={{ marginBottom: -7 }} /> @EtienneTech
                 </a>
               </CreditsText>
               <Spacer height={[0, 0, 1]} />
