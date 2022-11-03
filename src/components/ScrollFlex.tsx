@@ -10,7 +10,7 @@ type Props = {
   children: React.ReactNode | null;
   direction?: Direction;
   justifyContent?: "center" | "flex-start";
-  scrollRef?: RefObject<Scrollbar | null>;
+  scrollRef?: RefObject<Scrollbar>;
 };
 
 export const ScrollFlex = memo(function ScrollFlex({

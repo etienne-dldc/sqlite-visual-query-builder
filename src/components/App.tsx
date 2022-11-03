@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import SplitPane from "react-split-pane";
+import SplitPaneBase, { SplitPaneProps } from "react-split-pane";
 import styled from "styled-components";
 import { Editor } from "./Editor";
 import { Preview } from "./Preview";
@@ -9,6 +9,8 @@ import { ScrollFlex } from "./ScrollFlex";
 import { Spacer } from "./Spacer";
 import { Colors, fontHeightGrid, Fonts, grid } from "../logic/Design";
 import { Code, Heart, TwitterLogo } from "phosphor-react";
+
+const SplitPane = SplitPaneBase as React.ComponentType<React.PropsWithChildren<SplitPaneProps>>;
 
 export function App(): JSX.Element | null {
   const [state, setState] = useState<RootSliceState | null>(null);

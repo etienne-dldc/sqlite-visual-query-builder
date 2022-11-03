@@ -1,8 +1,11 @@
-import React, { Suspense, useLayoutEffect, useState } from "react";
-import { StrictMode } from "react";
-import { App } from "./App";
+import React, { StrictMode } from "react";
 import { createGlobalStyle } from "styled-components";
 import { Colors, fontFaces, Fonts } from "../logic/Design";
+import { App } from "./App";
+
+const STRICT_MODE_ENABLED = false;
+
+const MaybeStrictMode = STRICT_MODE_ENABLED ? StrictMode : React.Fragment;
 
 const GlobalStyleFonts = createGlobalStyle`${fontFaces}`;
 
@@ -63,10 +66,10 @@ const GlobalStyle = createGlobalStyle({
 
 export function Root(): JSX.Element | null {
   return (
-    <StrictMode>
+    <MaybeStrictMode>
       <GlobalStyleFonts />
       <GlobalStyle />
       <App />
-    </StrictMode>
+    </MaybeStrictMode>
   );
 }

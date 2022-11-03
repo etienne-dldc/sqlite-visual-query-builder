@@ -36,8 +36,8 @@ export const RootSlice = createFactory(() => {
     () =>
       format("\n" + statementsSlices.map((s) => s.sql).join("\n\n"), {
         language: "sql",
-        uppercase: true,
         linesBetweenQueries: 2,
+        keywordCase: "upper",
       }),
     [statementsSlices]
   );
